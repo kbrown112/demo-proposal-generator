@@ -33,13 +33,9 @@ export default function FileUploader() {
 
     return (
         <div>
+            <p>Upload RFP for AI Agents to reference:</p>
             <input type="file" onChange={handleFileChange} />
-            {file && (
-                <p>File name: {file.name}</p>
-            )}
-            {file && status !== "uploading" && 
-                <button onClick={handleFileUpload}>Upload</button>
-            }
+            <button onClick={handleFileUpload}>Upload</button>
 
             {status === "success" && (
                 <p>File uploaded successfully!</p>
