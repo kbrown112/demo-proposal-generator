@@ -1,0 +1,13 @@
+research_task:
+  description: >
+    what is a fun fact about {topic}
+  expected_output: >
+    A single sentence answer.
+  agent: researcher
+
+reporting_task:
+  description: >
+    what is a fun fact about {topic}
+  expected_output: >
+    A single sentence answer.
+  agent: reporting_analyst

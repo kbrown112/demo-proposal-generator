@@ -1,0 +1,1 @@
+A fun fact about the letter "Y" is that it is often called a "semivowel" because it can act as both a consonant and a vowel, similar to the letter "W."
