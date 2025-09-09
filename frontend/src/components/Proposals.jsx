@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import api from "../api.js";
 import AddProposalForm from './AddProposal.jsx';
+import SampleProposalUpload from './SampleProposalUpload.jsx';
+import FileUploader from './FileUploader';
 
 const Proposals = () => {
   const [proposalResponse, setProposalResponse] = useState('');
@@ -19,6 +21,7 @@ const Proposals = () => {
 
   return (
     <div>
+      <FileUploader />
       <AddProposalForm addProposalTopic={addProposalTopic} />
       <h2>Proposal Response from CrewAI:</h2>
       <h4>Topic: {proposalTopic}</h4>

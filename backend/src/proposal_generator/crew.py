@@ -39,33 +39,46 @@ class ProposalCrew():
     tasks: List[Task]
 
     @agent
-    def researcher(self) -> Agent:
-        
+    def proposal_expert(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['proposal_expert'], # type: ignore[index]
             verbose=True,
-            llm=get_azure_llm(),
+            llm=get_azure_llm()
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def manager(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['manager'], # type: ignore[index]
+            verbose=True,
+            llm=get_azure_llm()
+        )
+    
+    @agent
+    def analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['analyst'], # type: ignore[index]
             verbose=True,
             llm=get_azure_llm()
         )
 
     @task
-    def research_task(self) -> Task:
+    def proposal_expert_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['proposal_expert_task'], # type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def manager_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            config=self.tasks_config['manager_task'], # type: ignore[index]
+        )
+    
+    @task
+    def analyst_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['analyst_task'], # type: ignore[index]
+            output_file='solution_summary.md'
         )
 
     @crew

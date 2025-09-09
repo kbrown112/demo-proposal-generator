@@ -1,13 +1,28 @@
-research_task:
+proposal_expert_task:
   description: >
-    what is a fun fact about {topic}
+    Give me a detailed proposal outline about {topic}. The purpose of the proposal is to win business.
   expected_output: >
-    A single sentence answer.
-  agent: researcher
+    A detailed outline with the main topics to cover in a proposal about {topic}.
+    To show me that you read this document, incorporate the word {rfp} as the first word in your outline.
+    To show me that you read the additional content, incorporate the first item in the dictionary into the first line of your outline.
+  agent: manager
 
-reporting_task:
+manager_task:
   description: >
-    what is a fun fact about {topic}
+    Conduct a thorough research about {topic}
+    Review the context you got and expand each topic into a full section for a report.
+    Make sure the report is detailed and contains all relevant information.
   expected_output: >
-    A single sentence answer.
-  agent: reporting_analyst
+    A detailed {topic} proposal that incorporates knowledge about the industry and proposed solutions. The proposal should cover all sections as previously outlined.
+    A fully fledged report with the main topics, each with a full section of information.
+    incorporate the word {rfp} as the first word in your outline.
+  agent: manager
+
+analyst_task:
+  description: >
+    Review the context you got and research proposed solutions that could be implemented for the {topic} proposal.
+  expected_output: >
+    A detailed summary of the proposed solution ready to be turned into a full-fledged report.
+    incorporate the word {rfp} as the first word in your outline.
+    Formatted as markdown without '```'
+  agent: analyst

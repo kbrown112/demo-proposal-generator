@@ -4,12 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 from src.proposal_generator.crew import ProposalCrew
-
-class Fruit(BaseModel):
-    name: str
-
-class Fruits(BaseModel):
-    fruits: List[Fruit]
+from fastapi import File, UploadFile
 
 app = FastAPI()
 
@@ -25,16 +20,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-memory_db = {"fruits": []}
-
-@app.get("/fruits", response_model=Fruits)
-def get_fruits():
-    return Fruits(fruits=memory_db["fruits"])
-
-@app.post("/fruits", response_model=Fruit)
-def add_fruit(fruit: Fruit):
-    memory_db["fruits"].append(fruit)
-    return fruit
+rfp: str = ""
 
 # generic proposal
 @app.get("/proposal")
@@ -47,9 +33,17 @@ def get_proposal():
 @app.post("/proposal", response_model=str)
 def add_topic(topic: str):
     crew_instance = ProposalCrew()
-    inputs = {"topic": topic}
+    inputs = {"topic": topic, "rfp": rfp}
     result = crew_instance.crew().kickoff(inputs=inputs)
     return str(result)
+
+@app.post("/upload")
+async def endpoint(file: UploadFile = File(...)):
+    content = await file.read()
+    print(content)
+    global rfp
+    rfp = content.decode('utf-8')
+    return rfp
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
