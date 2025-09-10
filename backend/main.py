@@ -30,7 +30,7 @@ def get_proposal():
     result = crew_instance.crew().kickoff()
     return str(result)
     
-# specify proposal
+# specify proposal topic and rfp
 @app.post("/proposal", response_model=str)
 def add_topic(topic: str):
     crew_instance = ProposalCrew()
@@ -39,6 +39,7 @@ def add_topic(topic: str):
     result = crew_instance.crew().kickoff(inputs=inputs)
     return str(result)
 
+# upload rfp
 @app.post("/upload")
 async def endpoint(file: UploadFile = File(...)):
     global rfp
