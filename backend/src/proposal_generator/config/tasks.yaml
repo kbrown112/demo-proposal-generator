@@ -24,5 +24,4 @@ analyst_task:
   expected_output: >
     A detailed summary of the proposed solution ready to be turned into a full-fledged report.
     To show me that you read this document, incorporate the phrase {rfp} as the first line in your outline.
-    Formatted as markdown without '```'
   agent: analyst

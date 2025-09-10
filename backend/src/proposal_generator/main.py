@@ -17,10 +17,6 @@ def run():
     """
     Run the crew.
     """
-    print("hello world")
-    inputs = {
-        "question": "give me a fun fact about birds"
-    }
     
     try:
         ProposalCrew().crew().kickoff()

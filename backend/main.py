@@ -21,7 +21,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-rfp: str = ""
+global rfp
+rfp: str = "asj fkldsa jfwiajlskdj faiw;jiladjsflk asjwi;jfklsd;fkjawifjsla;jfsdlka"
 
 # generic proposal
 @app.get("/proposal")
@@ -42,7 +43,6 @@ def add_topic(topic: str):
 # upload rfp
 @app.post("/upload")
 async def endpoint(file: UploadFile = File(...)):
-    global rfp
     content = await file.read()
     if file.filename.lower().endswith(".pdf"):
         # Handle PDF files
@@ -56,16 +56,6 @@ async def endpoint(file: UploadFile = File(...)):
 
     print(rfp)
     return rfp
-
-
-    # content = await file.read()
-
-
-    # print(content)
-
-    # global rfp
-    # rfp = content.decode('utf-8')
-    # return "hello"
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
