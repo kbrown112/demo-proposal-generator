@@ -21,6 +21,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+global rfp
 rfp: str = ""
 
 # generic proposal
@@ -42,7 +43,6 @@ def add_topic(topic: str):
 # upload rfp
 @app.post("/upload")
 async def endpoint(file: UploadFile = File(...)):
-    global rfp
     content = await file.read()
     if file.filename.lower().endswith(".pdf"):
         # Handle PDF files
