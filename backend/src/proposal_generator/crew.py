@@ -78,7 +78,6 @@ class ProposalCrew():
     def analyst_task(self) -> Task:
         return Task(
             config=self.tasks_config['analyst_task'], # type: ignore[index]
-            output_file='solution_summary.md'
         )
 
     @crew

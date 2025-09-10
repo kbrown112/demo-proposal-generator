@@ -49,7 +49,69 @@ const Proposals = () => {
       // Regular paragraphs
       return line.trim() ? <p key={index}>{line}</p> : <br key={index} />;
     });
-};
+  };
+
+  const formatTextIntoSections = (text) => {
+    const lines = text.split('\n');
+    const sections = [];
+    let currentSection = { header: null, content: [] };
+    
+    lines.forEach((line, index) => {
+      // Check if it's a header
+      if (line.startsWith('# ') || line.startsWith('## ') || line.startsWith('### ')) {
+        // Save previous section if it has content
+        if (currentSection.header || currentSection.content.length > 0) {
+          sections.push(currentSection);
+        }
+        // Start new section
+        currentSection = { 
+          header: line, 
+          content: [],
+          level: line.startsWith('### ') ? 3 : line.startsWith('## ') ? 2 : 1
+        };
+      } else {
+        // Add content to current section
+        currentSection.content.push(line);
+      }
+    });
+    
+    // Don't forget the last section
+    if (currentSection.header || currentSection.content.length > 0) {
+      sections.push(currentSection);
+    }
+
+    console.log(sections)
+    
+    return sections.map((section, sectionIndex) => (
+      <div key={sectionIndex} className="section-box">
+        {/* Render header */}
+        {section.header && (
+          section.level === 1 ? <h1>{section.header.substring(2)}</h1> :
+          section.level === 2 ? <h2>{section.header.substring(3)}</h2> :
+          <h3>{section.header.substring(4)}</h3>
+        )}
+        
+        {/* Render content in scrollable area */}
+        <div className="section-content">
+          {section.content.map((line, lineIndex) => {
+            if (line.includes('**')) {
+              const parts = line.split(/(\*\*.*?\*\*)/);
+              return (
+                <p key={lineIndex}>
+                  {parts.map((part, i) => 
+                    part.startsWith('**') && part.endsWith('**') 
+                      ? <strong key={i}>{part.slice(2, -2)}</strong>
+                      : part
+                  )}
+                </p>
+              );
+            }
+            return line.trim() ? <p key={lineIndex}>{line}</p> : <br key={lineIndex} />;
+          })}
+        </div>
+      </div>
+    ));
+  };
 
   return (
     <div>
@@ -57,9 +119,7 @@ const Proposals = () => {
       <AddProposalForm addProposalTopic={addProposalTopic} />
       <h2>Proposal Response from CrewAI:</h2>
       <h4>Topic: {proposalTopic}</h4>
-      <div style={{whiteSpace: 'pre-wrap', lineHeight: '1.6'}}>
-      {proposalResponse ? formatText(proposalResponse) : ''}
-    </div>
+      {proposalResponse ? formatTextIntoSections(proposalResponse) : ''}
     </div>
   );
 };

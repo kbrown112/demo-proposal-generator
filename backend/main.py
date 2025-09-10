@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 global rfp
-rfp: str = ""
+rfp: str = "asj fkldsa jfwiajlskdj faiw;jiladjsflk asjwi;jfklsd;fkjawifjsla;jfsdlka"
 
 # generic proposal
 @app.get("/proposal")
