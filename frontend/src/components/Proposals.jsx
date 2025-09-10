@@ -19,13 +19,47 @@ const Proposals = () => {
     }
   };
 
+  const formatText = (text) => {
+  return text
+    .split('\n')
+    .map((line, index) => {
+      // Handle headers
+      if (line.startsWith('# ')) {
+        return <h1 key={index}>{line.substring(2)}</h1>;
+      }
+      if (line.startsWith('## ')) {
+        return <h2 key={index}>{line.substring(3)}</h2>;
+      }
+      if (line.startsWith('### ')) {
+        return <h3 key={index}>{line.substring(4)}</h3>;
+      }
+      // Handle bold text
+      if (line.includes('**')) {
+        const parts = line.split(/(\*\*.*?\*\*)/);
+        return (
+          <p key={index}>
+            {parts.map((part, i) => 
+              part.startsWith('**') && part.endsWith('**') 
+                ? <strong key={i}>{part.slice(2, -2)}</strong>
+                : part
+            )}
+          </p>
+        );
+      }
+      // Regular paragraphs
+      return line.trim() ? <p key={index}>{line}</p> : <br key={index} />;
+    });
+};
+
   return (
     <div>
       <FileUploader />
       <AddProposalForm addProposalTopic={addProposalTopic} />
       <h2>Proposal Response from CrewAI:</h2>
       <h4>Topic: {proposalTopic}</h4>
-      <p>{proposalResponse}</p>
+      <div style={{whiteSpace: 'pre-wrap', lineHeight: '1.6'}}>
+      {proposalResponse ? formatText(proposalResponse) : ''}
+    </div>
     </div>
   );
 };
