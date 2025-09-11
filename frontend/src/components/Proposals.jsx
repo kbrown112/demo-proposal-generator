@@ -51,6 +51,26 @@ const Proposals = () => {
     });
   };
 
+  const splitTextIntoSections = (text) => {
+    const pattern = /\d+\.\s/
+    const sections = text.split(pattern)
+    sections.forEach(function(entry) {
+
+      console.log("this is a new section: " + entry)
+    });
+
+    return sections.map((section, sectionIndex) => (
+    <div key={sectionIndex} className="section-box">
+      <div className="section-content">
+        {section.split('\n').map((line, lineIndex) => 
+          line.trim() ? <p key={lineIndex}>{line}</p> : <br key={lineIndex} />
+        )}
+      </div>
+    </div>
+  ));
+
+  }
+
   const formatTextIntoSections = (text) => {
     const lines = text.split('\n');
     const sections = [];
@@ -119,7 +139,8 @@ const Proposals = () => {
       <AddProposalForm addProposalTopic={addProposalTopic} />
       <h2>Proposal Response from CrewAI:</h2>
       <h4>Topic: {proposalTopic}</h4>
-      {proposalResponse ? formatTextIntoSections(proposalResponse) : ''}
+      {/* {proposalResponse ? formatTextIntoSections(proposalResponse) : ''} */}
+      {proposalResponse ? splitTextIntoSections(proposalResponse) : ''}
     </div>
   );
 };

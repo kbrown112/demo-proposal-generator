@@ -2,9 +2,9 @@ proposal_expert_task:
   description: >
     Give me a detailed proposal outline about {topic}. The purpose of the proposal is to win business.
   expected_output: >
-    A detailed outline with the main topics to cover in a proposal about {topic}.
-    To show me that you read this document, incorporate the phrase {rfp} as the first line in your outline.
-    To show me that you read the additional content, incorporate the first item in the dictionary into the first line of your outline.
+    A detailed outline with the main topics to cover in a proposal about {topic}. Reference information in {rfp} and address all questions asked.
+    Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
+    Include only three sections: Introduction, Plan, and Budget.
   agent: manager
 
 manager_task:
@@ -15,7 +15,8 @@ manager_task:
   expected_output: >
     A detailed {topic} proposal that incorporates knowledge about the industry and proposed solutions. The proposal should cover all sections as previously outlined.
     A fully fledged report with the main topics, each with a full section of information.
-    To show me that you read this document, incorporate the phrase {rfp} as the first line in your outline.
+    Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
+    Include only three sections: Introduction, Plan, and Budget.
   agent: manager
 
 analyst_task:
@@ -23,5 +24,6 @@ analyst_task:
     Review the context you got and research proposed solutions that could be implemented for the {topic} proposal.
   expected_output: >
     A detailed summary of the proposed solution ready to be turned into a full-fledged report.
-    To show me that you read this document, incorporate the phrase {rfp} as the first line in your outline.
+    Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
+    Include only three sections: Introduction, Plan, and Budget.
   agent: analyst
