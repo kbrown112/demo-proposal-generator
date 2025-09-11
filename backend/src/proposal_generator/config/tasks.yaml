@@ -5,6 +5,7 @@ proposal_expert_task:
     A detailed outline with the main topics to cover in a proposal about {topic}. Reference information in {rfp} and address all questions asked.
     Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
     Include only three sections: Introduction, Plan, and Budget.
+    Do not implement any sort of formatting (including numbers (outside of the section title as outlined above), bullet points, section headers, etc.) in the body of the text. It should only be formatted into separate paragraphs and new lines, whenever necessary.
   agent: manager
 
 manager_task:
@@ -17,6 +18,7 @@ manager_task:
     A fully fledged report with the main topics, each with a full section of information.
     Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
     Include only three sections: Introduction, Plan, and Budget.
+    Do not implement any sort of formatting (including numbers (outside of the section title as outlined above), bullet points, section headers, etc.) in the body of the text. It should only be formatted into separate paragraphs and new lines, whenever necessary.
   agent: manager
 
 analyst_task:
@@ -26,4 +28,5 @@ analyst_task:
     A detailed summary of the proposed solution ready to be turned into a full-fledged report.
     Format all sections with a single number followed by a period (ie. "1.", "2.", "3.", etc.) and the section title.
     Include only three sections: Introduction, Plan, and Budget.
+    Do not implement any sort of formatting (including numbers (outside of the section title as outlined above), bullet points, section headers, etc.) in the body of the text. It should only be formatted into separate paragraphs and new lines, whenever necessary.
   agent: analyst

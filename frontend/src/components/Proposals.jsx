@@ -52,15 +52,25 @@ const Proposals = () => {
   };
 
   const splitTextIntoSections = (text) => {
-    const pattern = /\d+\.\s/
-    const sections = text.split(pattern)
+    const pattern = /\d+\.\s[^.\n]+/g
+    const titles = text.match(pattern);
+    console.log(titles)
+    const sections = text.split(pattern).filter(section => section.trim() !== '');
     sections.forEach(function(entry) {
 
       console.log("this is a new section: " + entry)
     });
 
+    const titlesMap = new Map();
+    for (const [i, title] of titles.entries()) {
+      titlesMap.set(i, title);
+    }
+
     return sections.map((section, sectionIndex) => (
     <div key={sectionIndex} className="section-box">
+      <div className="section-header">
+        {titlesMap.get(sectionIndex)}
+      </div>
       <div className="section-content">
         {section.split('\n').map((line, lineIndex) => 
           line.trim() ? <p key={lineIndex}>{line}</p> : <br key={lineIndex} />

@@ -76,11 +76,15 @@ h4 {
   max-height: 300px;                 /* This limits height per section */
   overflow-y: auto;                  /* This makes each section scroll */
   line-height: 1.6;
-  align-items: left;
+  text-align: left;
 }
 
 .section-content p {
   margin: 0.5rem 0;
+}
+
+.section-header {
+  font-size: 20px
 }
 
 /* Dark theme support */
